@@ -11,6 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import ago.droid.blueprint.R
 import ago.droid.blueprint.viewmodels.home.HomeViewModel
+import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.navigation.findNavController
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
@@ -27,11 +30,29 @@ class HomeFragment : Fragment() {
         (activity?.application as MainApplication).appComponent.inject(this)
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
+
         val textView: TextView = root.findViewById(R.id.text_home)
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+            //textView.text = it
         })
+
+
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        var btnDashboard: LinearLayout = view.findViewById(R.id.btnDashboard)
+        btnDashboard.setOnClickListener {
+            view.findNavController().navigate(R.id.action_navigation_home_to_navigation_dashboard)
+        }
+
+        var btnNotification: LinearLayout = view.findViewById(R.id.btnNotification)
+        btnNotification.setOnClickListener {
+            view.findNavController().navigate(R.id.action_navigation_home_to_navigation_notifications)
+        }
+
     }
 
 }

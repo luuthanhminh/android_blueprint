@@ -19,6 +19,7 @@ class NotificationsViewModel @Inject constructor(
         value = ArrayList<Component>()
     }
     val components: LiveData<List<Component>> = _components
+
     init {
         loadData()
     }

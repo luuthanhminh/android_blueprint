@@ -10,10 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import ago.droid.blueprint.R
+import ago.droid.blueprint.adapters.ComponentAdapter
+import ago.droid.blueprint.adapters.HomeAdapter
 import ago.droid.blueprint.viewmodels.home.HomeViewModel
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
@@ -30,13 +34,6 @@ class HomeFragment : Fragment() {
         (activity?.application as MainApplication).appComponent.inject(this)
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
-
-        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            //textView.text = it
-        })
-
-
         return root
     }
 
@@ -52,6 +49,14 @@ class HomeFragment : Fragment() {
         btnNotification.setOnClickListener {
             view.findNavController().navigate(R.id.action_navigation_home_to_navigation_notifications)
         }
+
+        val lvCard: RecyclerView = view.findViewById(R.id.lvCard)
+        lvCard.layoutManager = LinearLayoutManager(activity?.applicationContext)
+
+        homeViewModel.cards.observe(viewLifecycleOwner, Observer {
+            var adapter = activity?.let { it1 -> HomeAdapter(it, it1.applicationContext) }
+            lvCard.adapter = adapter
+        })
 
     }
 

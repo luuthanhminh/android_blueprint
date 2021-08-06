@@ -12,10 +12,10 @@ interface ComponentDataSource {
 class ComponentDataSourceImpl @Inject constructor() : ComponentDataSource {
     override suspend fun getComponents(): List<ComponentModel> {
         delay(2000L);
-        return buildListComponent();
+        return buildData();
     }
 
-    private fun buildListComponent(): List<ComponentModel> {
+    private fun buildData(): List<ComponentModel> {
         var components = ArrayList<ComponentModel>()
         components.add(ComponentModel("Lorem ipsum dolor sit amet, consectetur adipiscing elit. ","https://www.google.com/"))
         components.add(ComponentModel("Lorem ipsum dolor sit amet, consectetur adipiscing elit. ","https://www.google.com/"))

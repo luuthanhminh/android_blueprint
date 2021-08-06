@@ -1,5 +1,7 @@
 package ago.droid.blueprint.viewmodels.home
 
+import ago.droid.blueprint.domain.entities.Component
+import ago.droid.blueprint.domain.entities.DCard
 import ago.droid.blueprint.domain.usecases.FetchDCardsUseCase
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -17,13 +19,19 @@ class HomeViewModel @Inject constructor(
         value = "This is home Fragment"
     }
     val text: LiveData<String> = _text
+
+    private var _cards = MutableLiveData<List<DCard>>().apply {
+        value = ArrayList()
+    }
+    val cards: LiveData<List<DCard>> = _cards
+
     init {
         loadData()
     }
     private fun loadData()  {
         viewModelScope.launch {
             val result = fetchDCardsUseCase(Unit)
-            _text.value = "Cards: " + result.size.toString();
+            _cards.value = result;
         }
 
     }

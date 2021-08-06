@@ -14,6 +14,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ViewListener
+import me.relex.circleindicator.CircleIndicator
 
 class HomeAdapter(private var items: List<DCard>,
                        private val context: Context
@@ -50,7 +51,11 @@ class HomeAdapter(private var items: List<DCard>,
             1 ->{
                 holder as CarouselviewHolder
                 holder.tvHeaderMulti.text = card.header
-                holder.carouselView.pageCount = card.images.size;
+                holder.indicator.createIndicators(card.images.size, 0)
+                holder.carouselView.pageCount = card.images.size
+                holder.carouselView.setPageTransformer { page, position ->
+                    holder.indicator.animatePageSelected(holder.carouselView.currentItem)
+                }
                 holder.carouselView.setViewListener(ViewListener {
                     val view = LayoutInflater.from(context).inflate(R.layout.item_image_view, null, false)
                     val tvNo: TextView = view.findViewById(R.id.tvNo)
@@ -85,4 +90,5 @@ class HomeAdapterHolder(view: View) : BaseHolder(view){
 class CarouselviewHolder(view: View) : BaseHolder(view){
     val tvHeaderMulti: TextView = view.findViewById(R.id.tvHeaderMulti)
     val carouselView: CarouselView = view.findViewById(R.id.carouselView)
+    val indicator: CircleIndicator = view.findViewById(R.id.indi)
 }

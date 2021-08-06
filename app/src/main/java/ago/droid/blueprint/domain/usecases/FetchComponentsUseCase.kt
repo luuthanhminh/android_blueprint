@@ -1,5 +1,6 @@
 package ago.droid.blueprint.domain.usecases
 
+import ago.droid.blueprint.data.models.ComponentModel
 import ago.droid.blueprint.domain.entities.Component
 import ago.droid.blueprint.domain.repositories.ComponentRepository
 import java.lang.Exception

@@ -16,7 +16,7 @@ class NotificationsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private var _components = MutableLiveData<List<Component>>().apply {
-        value = ArrayList()
+        value = ArrayList<Component>()
     }
     val components: LiveData<List<Component>> = _components
     init {

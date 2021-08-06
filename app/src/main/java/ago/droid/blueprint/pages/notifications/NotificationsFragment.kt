@@ -14,6 +14,7 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.Target
@@ -39,12 +40,12 @@ class NotificationsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val lvComponent: RecyclerView = view.findViewById(R.id.lvComponent)
-
+        val lvComponents: RecyclerView = view.findViewById(R.id.lvComponent)
+        lvComponents.layoutManager = LinearLayoutManager(activity?.applicationContext)
         notificationsViewModel.components.observe(viewLifecycleOwner, Observer {
             //textView.text = it
             var adapter = activity?.let { it1 -> ComponentAdapter(it, it1.applicationContext) }
-            lvComponent.adapter = adapter
+            lvComponents.adapter = adapter
         })
     }
 }

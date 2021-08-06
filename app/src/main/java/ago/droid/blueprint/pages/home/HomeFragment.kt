@@ -14,6 +14,7 @@ import ago.droid.blueprint.adapters.ComponentAdapter
 import ago.droid.blueprint.adapters.HomeAdapter
 import ago.droid.blueprint.viewmodels.home.HomeViewModel
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,13 +50,18 @@ class HomeFragment : Fragment() {
         btnNotification.setOnClickListener {
             view.findNavController().navigate(R.id.action_navigation_home_to_navigation_notifications)
         }
-
+        val progressBar : ProgressBar = view.findViewById(R.id.progressBar)
         val lvCard: RecyclerView = view.findViewById(R.id.lvCard)
         lvCard.layoutManager = LinearLayoutManager(activity?.applicationContext)
 
         homeViewModel.cards.observe(viewLifecycleOwner, Observer {
             var adapter = activity?.let { it1 -> HomeAdapter(it, it1.applicationContext) }
             lvCard.adapter = adapter
+            when(it.size){
+                0 -> progressBar.visibility = View.VISIBLE
+                else -> progressBar.visibility = View.GONE
+            }
+
         })
 
     }

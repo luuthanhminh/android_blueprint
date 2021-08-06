@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -40,12 +41,18 @@ class NotificationsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val progressBar : ProgressBar = view.findViewById(R.id.pbComponent)
         val lvComponents: RecyclerView = view.findViewById(R.id.lvComponent)
         lvComponents.layoutManager = LinearLayoutManager(activity?.applicationContext)
         notificationsViewModel.components.observe(viewLifecycleOwner, Observer {
             //textView.text = it
             var adapter = activity?.let { it1 -> ComponentAdapter(it, it1.applicationContext) }
             lvComponents.adapter = adapter
+
+            when(it.size){
+                0 -> progressBar.visibility = View.VISIBLE
+                else -> progressBar.visibility = View.GONE
+            }
         })
     }
 }

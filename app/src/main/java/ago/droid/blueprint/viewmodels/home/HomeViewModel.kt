@@ -15,10 +15,8 @@ class HomeViewModel @Inject constructor(
     private val fetchDCardsUseCase: FetchDCardsUseCase
 ) : ViewModel() {
 
-    private var _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
+    private val _openTaskEvent = MutableLiveData<Unit>()
+    val openTaskEvent: LiveData<Unit> = _openTaskEvent
 
     private var _cards = MutableLiveData<List<DCard>>().apply {
         value = ArrayList()

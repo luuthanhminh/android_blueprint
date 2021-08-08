@@ -26,18 +26,14 @@ class DashboardFragment : Fragment() {
     ): View? {
         dashboardViewModel =
                 ViewModelProvider(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        //val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
-            //textView.text = it
-        })
-        return root
+        return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val ivFirst: ImageView = view.findViewById(R.id.ivFirst)
         val factory = DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()
+
+        val ivFirst: ImageView = view.findViewById(R.id.ivFirst)
         Glide.with(this)
             .load("https://bosat.vn/gallery/rong-3.jpg")
             .transition(withCrossFade(factory))

@@ -31,6 +31,7 @@ class HomeFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+
         (activity?.application as MainApplication).appComponent.inject(this)
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
@@ -78,9 +79,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun openDashScreen(){
-        view?.let {
-            it.findNavController().navigate(R.id.action_navigation_home_to_navigation_dashboard)
-        }
+        activity?.findNavController(R.id.fr_home)?.navigate(R.id.action_navigation_home_to_navigation_dashboard)
+//        view?.let {
+//            it.findNavController().navigate(R.id.action_navigation_home_to_navigation_dashboard)
+//        }
     }
 
     private fun openComponentScreen(){

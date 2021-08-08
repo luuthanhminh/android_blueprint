@@ -1,5 +1,6 @@
 package ago.droid.blueprint.viewmodels.home
 
+import ago.droid.blueprint.data.remote.WebApi
 import ago.droid.blueprint.domain.entities.Component
 import ago.droid.blueprint.domain.entities.DCard
 import ago.droid.blueprint.domain.usecases.FetchDCardsUseCase
@@ -10,7 +11,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.*
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class HomeViewModel @Inject constructor(
     private val fetchDCardsUseCase: FetchDCardsUseCase
 ) : ViewModel() {

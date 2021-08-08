@@ -10,7 +10,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class NotificationsViewModel @Inject constructor(
     private val fetchComponentsUseCase: FetchComponentsUseCase
 ) : ViewModel() {

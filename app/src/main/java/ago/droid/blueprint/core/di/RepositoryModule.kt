@@ -1,9 +1,6 @@
 package ago.droid.blueprint.core.di
 
-import ago.droid.blueprint.data.datasources.ComponentDataSource
-import ago.droid.blueprint.data.datasources.ComponentDataSourceImpl
-import ago.droid.blueprint.data.datasources.DCardDataSource
-import ago.droid.blueprint.data.datasources.DCardDataSourceImpl
+import ago.droid.blueprint.data.datasources.*
 import ago.droid.blueprint.data.repositories.ComponentRepositoryImpl
 import ago.droid.blueprint.data.repositories.DCardRepositoryImpl
 import ago.droid.blueprint.domain.repositories.ComponentRepository
@@ -22,6 +19,10 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun provideComponentDataSource(componentDataSourceImpl: ComponentDataSourceImpl): ComponentDataSource
+
+    @Binds
+    @Singleton
+    abstract fun provideComponentApiSource(componentApiSourceImpl: ComponentApiSourceImpl): ComponentApiSource
 
     @Binds
     @Singleton

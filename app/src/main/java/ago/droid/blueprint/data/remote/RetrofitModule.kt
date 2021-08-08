@@ -51,6 +51,16 @@ class RetrofitModule {
             level = HttpLoggingInterceptor.Level.BODY
         }
         interceptors.add(loggingInterceptor)
+        val herderInterceptor = Interceptor { chain ->
+            val request = chain.request().newBuilder()
+                .header("authentication-token", "token")
+                .header("language", "vi")
+                .build()
+            request.let { req ->
+                chain.proceed(req)
+            }
+        }
+        interceptors.add(herderInterceptor)
         return interceptors
     }
 }

@@ -1,6 +1,7 @@
 package ago.droid.blueprint.pages
 
 import ago.droid.blueprint.R
+import ago.droid.blueprint.pages.base.BaseActivity
 import android.app.Activity
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -10,7 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

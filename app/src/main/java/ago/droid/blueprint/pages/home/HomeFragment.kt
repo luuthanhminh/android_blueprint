@@ -16,11 +16,13 @@ import ago.droid.blueprint.viewmodels.home.HomeViewModel
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
+import ago.droid.blueprint.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
@@ -33,28 +35,22 @@ class HomeFragment : Fragment() {
     ): View? {
 
         (activity?.application as MainApplication).appComponent.inject(this)
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        var binding: FragmentHomeBinding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_home,
+            container,
+            false
+        )
+        binding.notifyId = R.id.action_navigation_home_to_navigation_notifications
+        binding.dashboardId = R.id.action_navigation_home_to_navigation_dashboard
+        binding.homeViewModel = homeViewModel
+        binding.lifecycleOwner = this
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupNavigation()
         setupListAdapter()
-        setupButtons()
-    }
-
-    private fun setupButtons(){
-        activity?.let {
-            val btnDashboard: LinearLayout = it.findViewById(R.id.btnDashboard)
-            btnDashboard.setOnClickListener {
-                openDashScreen()
-            }
-
-            val btnNotification: LinearLayout = it.findViewById(R.id.btnNotification)
-            btnNotification.setOnClickListener {
-                openComponentScreen()
-            }
-        }
     }
 
     private fun setupListAdapter() {
@@ -66,28 +62,7 @@ class HomeFragment : Fragment() {
             homeViewModel.cards.observe(viewLifecycleOwner, Observer {
                 var adapter = activity?.let { it1 -> HomeAdapter(it, it1.applicationContext) }
                 lvCard.adapter = adapter
-                when(it.size){
-                    0 -> progressBar.visibility = View.VISIBLE
-                    else -> progressBar.visibility = View.GONE
-                }
-
             })
-        }
-    }
-
-    private fun setupNavigation() {
-    }
-
-    private fun openDashScreen(){
-        activity?.findNavController(R.id.fr_home)?.navigate(R.id.action_navigation_home_to_navigation_dashboard)
-//        view?.let {
-//            it.findNavController().navigate(R.id.action_navigation_home_to_navigation_dashboard)
-//        }
-    }
-
-    private fun openComponentScreen(){
-        view?.let {
-            it.findNavController().navigate(R.id.action_navigation_home_to_navigation_notifications)
         }
     }
 

@@ -1,5 +1,6 @@
-package ago.droid.blueprint.data.remote
+package ago.droid.blueprint.core.di
 
+import ago.droid.blueprint.data.remote.WebApi
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor

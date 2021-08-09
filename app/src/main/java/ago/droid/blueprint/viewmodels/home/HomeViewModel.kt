@@ -4,6 +4,7 @@ import ago.droid.blueprint.data.remote.WebApi
 import ago.droid.blueprint.domain.entities.Component
 import ago.droid.blueprint.domain.entities.DCard
 import ago.droid.blueprint.domain.usecases.FetchDCardsUseCase
+import ago.droid.blueprint.navigation.Navigator
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,7 +16,8 @@ import javax.inject.Singleton
 
 @Singleton
 class HomeViewModel @Inject constructor(
-    private val fetchDCardsUseCase: FetchDCardsUseCase
+    private val fetchDCardsUseCase: FetchDCardsUseCase,
+    private val navigator : Navigator
 ) : ViewModel() {
 
     private val _openTaskEvent = MutableLiveData<Unit>()
@@ -34,6 +36,10 @@ class HomeViewModel @Inject constructor(
             val result = fetchDCardsUseCase(Unit)
             _cards.value = result;
         }
-
     }
+
+    fun navigateToFragment(navId: Int, fragmentId:Int){
+        navigator.navigateByNavController(navId, fragmentId)
+    }
+
 }

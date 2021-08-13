@@ -5,8 +5,9 @@
     android:id="@+id/itemDeviceCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="30dp"
-    android:background="@drawable/item_device_card_background">
+    android:layout_marginTop="20dp"
+    android:background="@drawable/item_device_card_background"
+    >
 
     <TextView
         android:id="@+id/txtDeviceName"
@@ -50,24 +51,21 @@
         android:id="@+id/txtCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="10dp"
         android:text="TextView"
         android:textColor="#eee"
         app:layout_constraintEnd_toStartOf="@+id/dvContent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="374dp" />
+        app:layout_constraintTop_toBottomOf="@+id/imgDevice" />
 
     <ImageButton
         android:id="@+id/btnWarranty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/txtWarrantyStatus"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toEndOf="@+id/dvContent"
         app:layout_constraintTop_toBottomOf="@+id/imgDevice"
         tools:srcCompat="?android:attr/alertDialogIcon" />
@@ -75,23 +73,23 @@
     <TextView
         android:id="@+id/txtWarrantyStatus"
         android:layout_width="wrap_content"
-        android:layout_height="19dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="32dp"
         android:text="TextView"
         android:textColor="#eee"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnWarranty"
-        tools:layout_editor_absoluteY="374dp" />
+        app:layout_constraintTop_toBottomOf="@+id/imgDevice" />
 
     <View
         android:id="@+id/dvContent"
         android:layout_width="2dp"
         android:layout_height="30dp"
-        android:background="?android:attr/listDivider"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         android:backgroundTint="#eee"
-        app:layout_constraintEnd_toStartOf="@+id/btnWarranty"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:background="?android:attr/listDivider"
         app:layout_constraintStart_toEndOf="@+id/txtCode"
-        tools:layout_editor_absoluteY="368dp" />
+        app:layout_constraintTop_toBottomOf="@+id/imgDevice" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

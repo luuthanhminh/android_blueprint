@@ -2,5 +2,6 @@
     <string name="app_name">blueprint</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
+    <string name="title_dashboard2">Dashboard2</string>
     <string name="title_notifications">Notifications</string>
 </resources>

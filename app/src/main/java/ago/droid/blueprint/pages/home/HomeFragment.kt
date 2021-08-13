@@ -43,6 +43,7 @@ class HomeFragment : Fragment() {
         )
         binding.notifyId = R.id.action_navigation_home_to_navigation_notifications
         binding.dashboardId = R.id.action_navigation_home_to_navigation_dashboard
+        binding.dashboard2Id = R.id.action_navigation_home_to_navigation_dashboard2
         binding.homeViewModel = homeViewModel
         binding.lifecycleOwner = this
         return binding.root

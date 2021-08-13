@@ -3,8 +3,10 @@ package ago.droid.blueprint.core.di
 import ago.droid.blueprint.data.datasources.*
 import ago.droid.blueprint.data.repositories.ComponentRepositoryImpl
 import ago.droid.blueprint.data.repositories.DCardRepositoryImpl
+import ago.droid.blueprint.data.repositories.DeviceRepositoryImpl
 import ago.droid.blueprint.domain.repositories.ComponentRepository
 import ago.droid.blueprint.domain.repositories.DCardRepository
+import ago.droid.blueprint.domain.repositories.DeviceRepository
 import ago.droid.blueprint.navigation.Navigator
 import ago.droid.blueprint.navigation.NavigatorImpl
 import dagger.Binds
@@ -32,10 +34,18 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
+    abstract fun provideDeviceDataSource(deviceDataSourceImpl: DeviceDataSourceImpl): DevicesDataSource
+
+    @Binds
+    @Singleton
     abstract fun provideDCardRepository(dCardRepositoryImpl: DCardRepositoryImpl): DCardRepository
 
     @Binds
     @Singleton
     abstract fun provideComponentRepository(componentRepositoryImpl: ComponentRepositoryImpl): ComponentRepository
+
+    @Binds
+    @Singleton
+    abstract fun provideDeviceRepository(deviceRepositoryImpl: DeviceRepositoryImpl): DeviceRepository
 
 }

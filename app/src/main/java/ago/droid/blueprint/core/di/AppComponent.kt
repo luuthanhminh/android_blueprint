@@ -1,5 +1,6 @@
 package ago.droid.blueprint.core.di
 
+import ago.droid.blueprint.pages.dashboard2.Dashboard2Fragment
 import ago.droid.blueprint.pages.home.HomeFragment
 import ago.droid.blueprint.pages.notifications.NotificationsFragment
 import dagger.Component
@@ -10,6 +11,7 @@ import javax.inject.Singleton
 interface  ApplicationComponent  {
     fun inject(target: HomeFragment)
     fun inject(target: NotificationsFragment)
+    fun inject(target: Dashboard2Fragment)
 }
 
 //// Definition of a custom scope called ActivityScope

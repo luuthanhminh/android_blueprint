@@ -3,6 +3,10 @@ package ago.droid.blueprint.data.datasources
 import ago.droid.blueprint.data.models.ComponentModel
 import ago.droid.blueprint.data.remote.WebApi
 import android.util.Log
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
@@ -19,8 +23,23 @@ class ComponentApiSourceImpl @Inject constructor(private val webApi: WebApi) : C
         }
         var data = deferred.await()
         Log.d("getPeopleAsync:", data.size.toString())
-        return ArrayList()
 
+
+        val disposables = CompositeDisposable()
+        disposables.add(webApi.getUser()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe {Log.d("doOnSubscribe", "Loading")}
+            .doFinally { Log.d("doOnSubscribe", "Loading")}
+            .subscribe(
+                {
+
+                },{
+
+                }
+            ))
+        
+        return ArrayList()
         /*webApi.getPeople().enqueue(object :Callback<String>{
             override fun onResponse(call: Call<String>, response: Response<String>) {
 

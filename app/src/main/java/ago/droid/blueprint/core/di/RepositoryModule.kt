@@ -3,8 +3,10 @@ package ago.droid.blueprint.core.di
 import ago.droid.blueprint.data.datasources.*
 import ago.droid.blueprint.data.repositories.ComponentRepositoryImpl
 import ago.droid.blueprint.data.repositories.DCardRepositoryImpl
+import ago.droid.blueprint.data.repositories.ValidationDataRepositoryImpl
 import ago.droid.blueprint.domain.repositories.ComponentRepository
 import ago.droid.blueprint.domain.repositories.DCardRepository
+import ago.droid.blueprint.domain.repositories.ValidationDataRepository
 import ago.droid.blueprint.navigation.Navigator
 import ago.droid.blueprint.navigation.NavigatorImpl
 import dagger.Binds
@@ -28,6 +30,10 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
+    abstract fun provideValidationDataDataSource(validationDataDataSourceImpl: ValidationDataDataSourceImpl): ValidationDataDataSource
+
+    @Binds
+    @Singleton
     abstract fun provideComponentApiSource(componentApiSourceImpl: ComponentApiSourceImpl): ComponentApiSource
 
     @Binds
@@ -37,5 +43,9 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun provideComponentRepository(componentRepositoryImpl: ComponentRepositoryImpl): ComponentRepository
+
+    @Binds
+    @Singleton
+    abstract fun provideValidationDataRepository(validationDataRepositoryImpl: ValidationDataRepositoryImpl): ValidationDataRepository
 
 }

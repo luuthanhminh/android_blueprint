@@ -3,7 +3,9 @@ package ago.droid.blueprint.viewmodels.home
 import ago.droid.blueprint.data.remote.WebApi
 import ago.droid.blueprint.domain.entities.Component
 import ago.droid.blueprint.domain.entities.DCard
+import ago.droid.blueprint.domain.entities.ValidationData
 import ago.droid.blueprint.domain.usecases.FetchDCardsUseCase
+import ago.droid.blueprint.domain.usecases.FetchValidationDataUseCase
 import ago.droid.blueprint.navigation.Navigator
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -33,8 +35,8 @@ class HomeViewModel @Inject constructor(
     }
     private fun loadData()  {
         viewModelScope.launch {
-            val result = fetchDCardsUseCase(Unit)
-            _cards.value = result;
+            val cardResult = fetchDCardsUseCase(Unit)
+            _cards.value = cardResult;
         }
     }
 

@@ -1,12 +1,14 @@
 package ago.droid.blueprint.pages.dashboard
 
 import ago.droid.blueprint.R
+import ago.droid.blueprint.databinding.FragmentDashboardBinding
 import ago.droid.blueprint.viewmodels.dashboard.DashboardViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -26,6 +28,13 @@ class DashboardFragment : Fragment() {
     ): View? {
         dashboardViewModel =
                 ViewModelProvider(this).get(DashboardViewModel::class.java)
+
+        var binding: FragmentDashboardBinding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_dashboard,
+            container,
+            false
+        )
         return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
 

@@ -13,7 +13,8 @@ import javax.inject.Singleton
 
 @Singleton
 class MainViewModel @Inject constructor(
-    private val fetchValidationDataUseCase: FetchValidationDataUseCase
+    private val fetchValidationDataUseCase: FetchValidationDataUseCase,
+    private val navigator: Navigator
 ) : ViewModel() {
 
     private var _listValidationData = MutableLiveData<List<ValidationData>>().apply {
@@ -29,5 +30,9 @@ class MainViewModel @Inject constructor(
             val result = fetchValidationDataUseCase(Unit)
             _listValidationData.value = result
         }
+    }
+
+    fun replaceGraph(navId: Int, graphId: Int){
+        navigator.replaceByNavController(navId, graphId)
     }
 }

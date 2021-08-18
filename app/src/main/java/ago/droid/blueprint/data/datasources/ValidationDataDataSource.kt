@@ -10,15 +10,18 @@ interface ValidationDataDataSource {
 
 class ValidationDataDataSourceImpl @Inject constructor() : ValidationDataDataSource {
     override suspend fun getValidationData(): List<ValidationDataModel> {
-        delay(2000L);
+        delay(5000L);
         return buildData();
     }
 
     private fun buildData(): List<ValidationDataModel> {
         var listValidationData = ArrayList<ValidationDataModel>()
         listValidationData.add(
-            ValidationDataModel("Lorem ipsum dolor sit amet, consectetur adipiscing elit. ","https://www.google.com/", 67000)
+            ValidationDataModel("Lorem ipsum dolor sit amet, consectetur adipiscing","1234567890123", "67000")
         )
+//        listValidationData.add(
+//            ValidationDataModel("Lorem ipsum dolor sit amet,","abc", "")
+//        )
 
         return listValidationData
     }

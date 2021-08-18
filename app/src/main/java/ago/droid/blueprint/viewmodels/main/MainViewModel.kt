@@ -13,9 +13,7 @@ import javax.inject.Singleton
 
 @Singleton
 class MainViewModel @Inject constructor(
-    private val fetchValidationDataUseCase: FetchValidationDataUseCase,
-    private val navigator : Navigator
-
+    private val fetchValidationDataUseCase: FetchValidationDataUseCase
 ) : ViewModel() {
 
     private var _listValidationData = MutableLiveData<List<ValidationData>>().apply {
@@ -31,9 +29,5 @@ class MainViewModel @Inject constructor(
             val result = fetchValidationDataUseCase(Unit)
             _listValidationData.value = result
         }
-    }
-
-    fun navigateToFragment(navId: Int, fragmentId:Int){
-        navigator.navigateByNavController(navId, fragmentId)
     }
 }

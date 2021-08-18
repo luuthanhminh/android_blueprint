@@ -55,7 +55,6 @@ class MainActivity : BaseActivity() {
         (application as MainApplication).appComponent.inject(this)
 
 
-
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val navController: NavController = findNavController(R.id.nav_host_fragment);
         Log.i("BLUEPRINT LOG", "init")
@@ -98,30 +97,30 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    @BindingAdapter("onNavigationItemSelected")
-    public fun setOnNavigationItemSelected(
-        navView: BottomNavigationView,
-        listener: BottomNavigationView
-    ) {
-        navView.setOnNavigationItemSelectedListener { menuItem ->
-            navView.menu.findItem(menuItem.itemId).isChecked = true
-            when (menuItem.itemId) {
-                R.id.navigation_home -> {
-                    R.navigation.mobile_navigation
-
-                }
-                R.id.navigation_dashboard -> {
-                    R.navigation.dashboard_navigation
-
-                }
-                R.id.navigation_notifications -> {
-                    R.navigation.notification_navigation
-                }
-                R.id.navigation_account -> {
-
-                }
-            }
-            false
-        }
-    }
+//    @BindingAdapter("onNavigationItemSelected")
+//    public fun setOnNavigationItemSelected(
+//        navView: BottomNavigationView,
+//        listener: BottomNavigationView
+//    ) {
+//        navView.setOnNavigationItemSelectedListener { menuItem ->
+//            navView.menu.findItem(menuItem.itemId).isChecked = true
+//            when (menuItem.itemId) {
+//                R.id.navigation_home -> {
+//                    R.navigation.mobile_navigation
+//
+//                }
+//                R.id.navigation_dashboard -> {
+//                    R.navigation.dashboard_navigation
+//
+//                }
+//                R.id.navigation_notifications -> {
+//                    R.navigation.notification_navigation
+//                }
+//                R.id.navigation_account -> {
+//
+//                }
+//            }
+//            false
+//        }
+//    }
 }

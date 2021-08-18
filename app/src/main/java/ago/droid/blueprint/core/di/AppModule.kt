@@ -16,8 +16,4 @@ class AppModule {
     @Provides
     @Singleton
     fun providesApplication(): MainApplication = MainApplication.instance
-
-    @Provides
-    @Singleton
-    fun providesFirebaseAnalytics(): FirebaseAnalytics = Firebase.analytics
 }

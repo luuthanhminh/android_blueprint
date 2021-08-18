@@ -20,16 +20,23 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
+import com.google.firebase.ktx.Firebase
 import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
 
     @Inject
     lateinit var mainViewModel: MainViewModel
+    @Inject
+    lateinit var firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         //val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         //val navController = findNavController(R.id.nav_host_fragment)
@@ -48,6 +55,7 @@ class MainActivity : BaseActivity() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val navController: NavController = findNavController(R.id.nav_host_fragment);
         Log.i("BLUEPRINT LOG", "init")
+
         mainViewModel.listValidationData.observe(this, Observer { it ->
             if(it.size!! > 0) {
                 Log.i("BLUEPRINT LOG",
@@ -56,6 +64,12 @@ class MainActivity : BaseActivity() {
                             "${it?.get(0)?.purchaseId?.length == 13} ${isNumber(it[0]?.purchaseId)} " +
                             "${it?.get(0)?.zipCode?.isNullOrBlank()}"
                 )
+
+                firebaseAnalytics.logEvent(FirebaseAnalytics.Event.VIEW_ITEM) {
+                    param(FirebaseAnalytics.Param.ITEM_NAME, it[0].emailVerification)
+                    param(FirebaseAnalytics.Param.ITEM_ID, it[0].purchaseId)
+                    param(FirebaseAnalytics.Param.CONTENT, it[0].zipCode)
+                }
             }
 
             when( it.size!! > 0 && !it[0]?.emailVerification?.isNullOrBlank() &&

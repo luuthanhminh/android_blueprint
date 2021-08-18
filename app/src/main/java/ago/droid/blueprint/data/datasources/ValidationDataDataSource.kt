@@ -17,7 +17,7 @@ class ValidationDataDataSourceImpl @Inject constructor() : ValidationDataDataSou
     private fun buildData(): List<ValidationDataModel> {
         var listValidationData = ArrayList<ValidationDataModel>()
         listValidationData.add(
-            ValidationDataModel("Lorem ipsum dolor sit amet, consectetur adipiscing","1234567890123", "67000")
+            ValidationDataModel("Lorem ipsum dolor sit amet","1234567890123", "67000")
         )
 //        listValidationData.add(
 //            ValidationDataModel("Lorem ipsum dolor sit amet,","abc", "")

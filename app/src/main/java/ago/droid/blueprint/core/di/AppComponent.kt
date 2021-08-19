@@ -7,7 +7,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [RepositoryModule::class, UseCaseModule::class, RetrofitModule::class, AppModule::class])
+@Component(modules = [RepositoryModule::class, UseCaseModule::class, RetrofitModule::class, AppModule::class, ServiceModule::class])
 interface  ApplicationComponent  {
     fun inject(target: HomeFragment)
     fun inject(target: NotificationsFragment)

@@ -5,7 +5,6 @@ import ago.droid.blueprint.R
 import ago.droid.blueprint.databinding.ActivityMainBinding
 import ago.droid.blueprint.databinding.FragmentHomeBinding
 import ago.droid.blueprint.pages.base.BaseActivity
-import ago.droid.blueprint.utils.isNumber
 import ago.droid.blueprint.viewmodels.main.MainViewModel
 import android.app.Activity
 import android.os.Bundle
@@ -51,20 +50,20 @@ class MainActivity : BaseActivity() {
 //        ))
 //        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-        findViewById<Toolbar>(R.id.toolbar).setupWithNavController(navController)
+//        findViewById<Toolbar>(R.id.toolbar).setupWithNavController(navController)
 
-        mainViewModel.listValidationData.observe(this, Observer { it ->
-
-            when( it.size!! > 0 && !it[0]?.emailVerification?.isNullOrBlank() &&
-                    it[0]?.purchaseId?.length == 13 && isNumber(it[0]?.purchaseId) &&
-                    !it[0]?.zipCode?.isNullOrBlank() ) {
-
-
-                true -> navView.menu.forEach { itm -> itm.isEnabled = true }
-                else -> navView.menu.forEach { itm -> itm.isEnabled = false }
-
-            }
-        })
+//        mainViewModel.listValidationData.observe(this, Observer { it ->
+//
+//            when( it.size!! > 0 && !it[0]?.emailVerification?.isNullOrBlank() &&
+//                    it[0]?.purchaseId?.length == 13 && isNumber(it[0]?.purchaseId) &&
+//                    !it[0]?.zipCode?.isNullOrBlank() ) {
+//
+//
+//                true -> navView.menu.forEach { itm -> itm.isEnabled = true }
+//                else -> navView.menu.forEach { itm -> itm.isEnabled = false }
+//
+//            }
+//        })
     }
 
 }

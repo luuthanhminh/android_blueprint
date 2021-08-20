@@ -20,6 +20,6 @@ class AccountViewModel @Inject constructor(
              path = downloadService.downloadImage(activity, url)
         }
 
-        return imageService.cropImage(path, 0, 0, width, width);
+        return imageService.cropImage(path, 0, 0, width, width); //Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888)
     }
 }

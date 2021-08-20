@@ -15,6 +15,10 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.io.File
 import javax.inject.Inject
@@ -49,6 +53,8 @@ class AccountFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         activity?.let {
             var btnDownload: Button = it.findViewById(R.id.btnDownload)
+            var imageView: ImageView = it.findViewById(R.id.imgDownloadResult)
+
             btnDownload.setOnClickListener {
                 this.activity?.let { it1 ->
                     var bitmap: Bitmap = Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888);
@@ -56,8 +62,8 @@ class AccountFragment : Fragment() {
                         bitmap = accountViewModel.downloadImageSquare(it1, imageUrl, 200)
                     }
 //                    Log.i("ss", "Imaddd " + path + File(path).exists());
+//                    imageView.setImageResource(R.drawable.ic_home_black_24dp)
 
-                    val imageView = it.findViewById<ImageView>(R.id.imgDownloadResult)
                     imageView.setImageBitmap(Bitmap.createBitmap(bitmap))
                 }
             }

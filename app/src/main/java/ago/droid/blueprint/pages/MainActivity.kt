@@ -16,6 +16,7 @@ import androidx.core.view.forEach
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.Observer
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -34,7 +35,6 @@ class MainActivity : BaseActivity() {
             layoutInflater
         )
 
-        binding.homeGraphId = R.navigation.mobile_navigation
         binding.mainViewModel = mainViewModel
         binding.lifecycleOwner = this
         val view = binding.root
@@ -42,14 +42,16 @@ class MainActivity : BaseActivity() {
 //        setContentView(R.layout.activity_main)
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
+
         val navController = findNavController(R.id.nav_host_fragment)
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_home,
-            R.id.navigation_dashboard,
-            R.id.navigation_notifications
-        ))
+//        val appBarConfiguration = AppBarConfiguration(setOf(
+//            R.id.navigation_home,
+//            R.id.navigation_dashboard,
+//            R.id.navigation_notifications
+//        ))
 //        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        findViewById<Toolbar>(R.id.toolbar).setupWithNavController(navController)
 
         mainViewModel.listValidationData.observe(this, Observer { it ->
 

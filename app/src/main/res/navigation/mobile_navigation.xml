@@ -34,5 +34,18 @@
         android:id="@+id/navigation_account"
         android:name="ago.droid.blueprint.pages.account.AccountFragment"
         android:label="@string/title_account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_navigation_account_to_navigation_weather"
+            app:destination="@id/navigation_weather" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_weather"
+        android:name="ago.droid.blueprint.pages.weather.WeatherFragment"
+        android:label="@string/title_weather"
+        tools:layout="@layout/fragment_weather" />
+    <fragment
+        android:id="@+id/navigation_forecast"
+        android:name="ago.droid.blueprint.pages.forecast.ForecastFragment"
+        android:label="ForecastFragment" />
 </navigation>

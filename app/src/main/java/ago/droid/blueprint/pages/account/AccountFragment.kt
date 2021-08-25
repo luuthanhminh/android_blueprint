@@ -42,7 +42,7 @@ class AccountFragment : Fragment() {
         )
 
         binding.url = "https://i.imgur.com/yc3CbKN.jpg"
-
+        binding.weatherId = R.id.action_navigation_account_to_navigation_weather
         binding.accountViewModel = accountViewModel
         binding.lifecycleOwner = this
         return binding.root

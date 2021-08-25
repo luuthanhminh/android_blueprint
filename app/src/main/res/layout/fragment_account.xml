@@ -9,6 +9,11 @@
         <variable
             name="url"
             type="String" />
+
+        <variable
+            name="weatherId"
+            type="int" />
+
         <variable
             name="accountViewModel"
             type="ago.droid.blueprint.viewmodels.account.AccountViewModel" />
@@ -56,6 +61,17 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/btnDownload" />
+
+                <Button
+                    android:id="@+id/btnWeather"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="124dp"
+                    android:text="Weather"
+                    android:onClick="@{(view) -> accountViewModel.navigateToFragment(view.id, weatherId)}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>

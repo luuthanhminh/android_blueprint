@@ -4,9 +4,11 @@ import ago.droid.blueprint.data.datasources.*
 import ago.droid.blueprint.data.repositories.ComponentRepositoryImpl
 import ago.droid.blueprint.data.repositories.DCardRepositoryImpl
 import ago.droid.blueprint.data.repositories.ValidationDataRepositoryImpl
+import ago.droid.blueprint.data.repositories.WeatherRepositoryImpl
 import ago.droid.blueprint.domain.repositories.ComponentRepository
 import ago.droid.blueprint.domain.repositories.DCardRepository
 import ago.droid.blueprint.domain.repositories.ValidationDataRepository
+import ago.droid.blueprint.domain.repositories.WeatherRepository
 import ago.droid.blueprint.navigation.Navigator
 import ago.droid.blueprint.navigation.NavigatorImpl
 import dagger.Binds
@@ -38,6 +40,10 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
+    abstract fun provideWeatherApiSource(openWeatherApiSource: OpenWeatherApiSource): WeatherApiSource
+
+    @Binds
+    @Singleton
     abstract fun provideDCardRepository(dCardRepositoryImpl: DCardRepositoryImpl): DCardRepository
 
     @Binds
@@ -47,5 +53,9 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun provideValidationDataRepository(validationDataRepositoryImpl: ValidationDataRepositoryImpl): ValidationDataRepository
+
+    @Binds
+    @Singleton
+    abstract fun provideWeatherRepository(weatherRepositoryImpl: WeatherRepositoryImpl): WeatherRepository
 
 }

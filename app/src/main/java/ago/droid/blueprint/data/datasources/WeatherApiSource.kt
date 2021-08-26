@@ -5,16 +5,17 @@ import ago.droid.blueprint.domain.entities.CityForecast
 import ago.droid.blueprint.domain.entities.CityWeather
 import android.util.Log
 import io.reactivex.Observable
+import io.reactivex.Single
 import javax.inject.Inject
 
 interface WeatherApiSource {
-    fun getWeather(q: String): Observable<CityWeather>
+    fun getWeather(q: String): Single<CityWeather>
     fun getForecast(q: String): Observable<CityForecast>
 }
 
 class OpenWeatherApiSource @Inject constructor(
     private val openWeatherApi: OpenWeatherApi) : WeatherApiSource {
-    override fun getWeather(q: String): Observable<CityWeather> {
+    override fun getWeather(q: String): Single<CityWeather> {
         Log.d("BLUEPRINT", "BLUU" + "getWAPI")
         return openWeatherApi.getWeather(q)
     }

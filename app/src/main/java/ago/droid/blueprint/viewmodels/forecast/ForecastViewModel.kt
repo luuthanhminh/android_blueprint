@@ -39,6 +39,7 @@ class ForecastViewModel @Inject constructor(
                     _forecast.value = it;
                 }
                 .subscribe {
+
                 }
         }
     }

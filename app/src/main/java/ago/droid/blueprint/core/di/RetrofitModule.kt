@@ -120,7 +120,7 @@ class RetrofitModule {
         val headerInterceptor = Interceptor { chain ->
             val request = chain.request().newBuilder()
                 .header("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
-                .header("x-rapidapi-key", "")
+                .header("x-rapidapi-key", "418af48c7bmshfd42286e56aede1p1b6c5ajsn20e7fd9103fc")
                 .build()
             request.let { req ->
                 chain.proceed(req)

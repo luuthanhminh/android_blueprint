@@ -3,11 +3,12 @@ package ago.droid.blueprint.data.remote
 import ago.droid.blueprint.domain.entities.CityForecast
 import ago.droid.blueprint.domain.entities.CityWeather
 import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.http.*
 
 interface OpenWeatherApi {
     @GET("weather")
-    fun getWeather(@Query("q") q: String): Observable<CityWeather>
+    fun getWeather(@Query("q") q: String): Single<CityWeather>
 
     @GET("forecast")
     fun getForecast(@Query("q") q: String): Observable<CityForecast>

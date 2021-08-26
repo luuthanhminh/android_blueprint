@@ -36,12 +36,13 @@ class WeatherViewModel @Inject constructor(
             val getWeather = fetchWeatherUseCase("ho chi minh")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .map {
-                    Log.d("BLUEPRINT", "BLUUMAIN" + it.id?.toString())
-                    _weather.value = it;
-                }
-                .subscribe {
-                }
+//                .map {
+//                    Log.d("BLUEPRINT", "BLUUMAIN" + it.id?.toString())
+//                    _weather.value = it;
+//                }
+                .subscribe(
+                    {it -> _weather.value = it}
+                )
         }
 
     }

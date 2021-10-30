@@ -88,6 +88,5 @@ class HomeViewModelUnitTest {
     }
 
     @After
-    fun tearDown() {
-    }
+    fun tearDown() {}
 }

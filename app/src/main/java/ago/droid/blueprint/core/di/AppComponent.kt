@@ -5,8 +5,8 @@ import ago.droid.blueprint.pages.notifications.NotificationsFragment
 import dagger.Component
 import javax.inject.Singleton
 
-@Singleton
-@Component(modules = [RepositoryModule::class, UseCaseModule::class, RetrofitModule::class, AppModule::class])
+@Singleton @Component(modules = [RepositoryModule::class, UseCaseModule::class, RetrofitModule::class, AppModule::class,
+DatabaseModule::class])
 interface  ApplicationComponent  {
     fun inject(target: HomeFragment)
     fun inject(target: NotificationsFragment)

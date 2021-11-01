@@ -4,6 +4,7 @@ buildscript {
     ext.mockito_version = "4.0.0"
     ext.espresso_version = "3.3.0"
     ext.android_navigation_version = "2.3.5"
+    ext.room_version = "2.3.0"
     repositories {
         google()
         jcenter()

@@ -33,7 +33,7 @@ class DCardDataSourceImpl @Inject constructor(val dCardDao: DCardDao) : DCardDat
     }
 
     private fun buildData(): PagingSource<Int, DCardModel> {
-        return dCardDao.getAll()
+        return dCardDao.getAllPaging()
     }
 
 }

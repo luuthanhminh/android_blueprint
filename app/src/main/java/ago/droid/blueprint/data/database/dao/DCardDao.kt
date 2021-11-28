@@ -17,5 +17,5 @@ abstract class DCardDao {
     abstract fun delete(dCard: DCardModel)
 
     @Query("SELECT * FROM DCardModel")
-    abstract fun getAll(): PagingSource<Int, DCardModel> //List<DCardModel>
+    abstract fun getAllPaging(): PagingSource<Int, DCardModel> //List<DCardModel>
 }

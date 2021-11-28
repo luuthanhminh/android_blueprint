@@ -19,5 +19,5 @@ abstract class ComponentDao {
     abstract fun delete(component: ComponentModel)
 
     @Query("SELECT * FROM ComponentModel")
-    abstract fun getAll(): PagingSource<Int, ComponentModel>
+    abstract fun getAllPaging(): PagingSource<Int, ComponentModel>
 }

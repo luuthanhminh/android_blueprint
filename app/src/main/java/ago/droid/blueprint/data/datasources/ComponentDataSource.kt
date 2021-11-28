@@ -26,6 +26,6 @@ class ComponentDataSourceImpl @Inject constructor(private val componentDao: Comp
     }
 
     private fun buildData(): PagingSource<Int, ComponentModel> {
-        return componentDao.getAll()
+        return componentDao.getAllPaging()
     }
 }

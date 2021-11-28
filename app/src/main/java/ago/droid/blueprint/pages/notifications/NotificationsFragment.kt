@@ -61,13 +61,13 @@ class NotificationsFragment : Fragment() {
                 Log.i(TAG, "aaaav: $it")
                 lifecycleScope.launch {
                     adapter?.submitData(it)
-                    if (adapter != null) {
-                        when(adapter.itemCount){
-                            0 -> progressBar.visibility = View.VISIBLE
-                            else -> progressBar.visibility = View.GONE
-                        }
-                    }
                 }
+
+                when(it  == null){
+                    true -> progressBar.visibility = View.VISIBLE
+                    else -> progressBar.visibility = View.GONE
+                }
+
             })
     }
 

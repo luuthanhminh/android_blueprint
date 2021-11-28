@@ -3,8 +3,8 @@ package ago.droid.blueprint.data.database
 import ago.droid.blueprint.data.database.converter.Converters
 import ago.droid.blueprint.data.database.dao.ComponentDao
 import ago.droid.blueprint.data.database.dao.DCardDao
-import ago.droid.blueprint.data.database.entities.ComponentEntity
-import ago.droid.blueprint.data.database.entities.DCardEntity
+import ago.droid.blueprint.data.models.ComponentModel
+import ago.droid.blueprint.data.models.DCardModel
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
@@ -13,7 +13,7 @@ import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(
-    entities = [ComponentEntity::class, DCardEntity::class],
+    entities = [ComponentModel::class, DCardModel::class],
     version = 1,
     exportSchema = false
 )

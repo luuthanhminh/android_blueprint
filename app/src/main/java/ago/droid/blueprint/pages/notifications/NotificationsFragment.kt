@@ -3,10 +3,12 @@ package ago.droid.blueprint.pages.notifications
 import ago.droid.blueprint.MainApplication
 import ago.droid.blueprint.R
 import ago.droid.blueprint.adapters.ComponentAdapter
+import ago.droid.blueprint.adapters.diffutils.ComponentDiffUtil
 import ago.droid.blueprint.viewmodels.home.HomeViewModel
 import ago.droid.blueprint.viewmodels.notifications.NotificationsViewModel
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,14 +17,17 @@ import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.Target
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 class NotificationsFragment : Fragment() {
+    val TAG = NotificationsFragment::class.java.simpleName
 
     @Inject
     lateinit var notificationsViewModel: NotificationsViewModel
@@ -44,15 +49,24 @@ class NotificationsFragment : Fragment() {
         val progressBar : ProgressBar = view.findViewById(R.id.pbComponent)
         val lvComponents: RecyclerView = view.findViewById(R.id.lvComponent)
         lvComponents.layoutManager = LinearLayoutManager(activity?.applicationContext)
-        notificationsViewModel.components.observe(viewLifecycleOwner, Observer {
-            //textView.text = it
-            var adapter = activity?.let { it1 -> ComponentAdapter(it, it1.applicationContext) }
+
+        context?.let { ctx -> {
+            Log.i(TAG, "aaaav1:")
+
+            var adapter = ComponentAdapter(ComponentDiffUtil, ctx)
             lvComponents.adapter = adapter
 
-            when(it.size){
-                0 -> progressBar.visibility = View.VISIBLE
-                else -> progressBar.visibility = View.GONE
-            }
-        })
+            notificationsViewModel.components.observe(viewLifecycleOwner, Observer {
+                Log.i(TAG, "aaaav: $it")
+                lifecycleScope.launch {
+                    adapter?.submitData(it)
+                    when(it){
+                        null -> progressBar.visibility = View.VISIBLE
+                        else -> progressBar.visibility = View.GONE
+                    }
+                }
+            })
+        }}
+
     }
 }

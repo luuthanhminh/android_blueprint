@@ -2,13 +2,19 @@ package ago.droid.blueprint.viewmodels.notifications
 
 import ago.droid.blueprint.data.models.ComponentModel
 import ago.droid.blueprint.domain.entities.Component
+import ago.droid.blueprint.domain.repositories.ComponentRepository
 import ago.droid.blueprint.domain.usecases.FetchComponentsUseCase
 import ago.droid.blueprint.domain.usecases.FetchDCardsUseCase
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import ago.droid.blueprint.pages.notifications.NotificationsFragment
+import android.util.Log
+import androidx.lifecycle.*
+import androidx.paging.*
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import java.lang.Exception
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -16,19 +22,35 @@ import javax.inject.Singleton
 class NotificationsViewModel @Inject constructor(
     private val fetchComponentsUseCase: FetchComponentsUseCase
 ) : ViewModel() {
+    private val TAG = NotificationsViewModel::class.java.simpleName
 
-    private var _components = MutableLiveData<List<Component>>().apply {
-        value = ArrayList<Component>()
+    private var _components = MutableLiveData<PagingData<Component>>().apply {
+        value = null
     }
-    val components: LiveData<List<Component>> = _components
+    val components: MutableLiveData<PagingData<Component>> = MutableLiveData()
 
     init {
         loadData()
     }
     private fun loadData()  {
-        viewModelScope.launch {
-            val result = fetchComponentsUseCase(Unit)
-            _components.value = result
+        try {
+            val result = Pager(
+                // Configure how data is loaded by passing additional properties to
+                // PagingConfig, such as prefetchDistance.
+                PagingConfig(pageSize = 20)
+            ) {
+                fetchComponentsUseCase(Unit)
+            }.flow
+                .cachedIn(viewModelScope)
+
+            viewModelScope.launch {
+                result.collect {
+                    Log.i(TAG, "aaaaf: $it")
+                    components.postValue(it.map { it1 -> Component(it1.text, it1.url) })
+                }
+            }
+        } catch (e: Exception) {
+            Log.i(TAG, "aaaaa: $e")
         }
 
     }

@@ -1,6 +1,8 @@
 package ago.droid.blueprint.data.database.dao
 
-import ago.droid.blueprint.data.database.entities.ComponentEntity
+import ago.droid.blueprint.data.models.ComponentModel
+import androidx.paging.DataSource
+import androidx.paging.PagingSource
 import androidx.room.*
 
 
@@ -8,14 +10,14 @@ import androidx.room.*
 abstract class ComponentDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insert(components: ComponentEntity)
+    abstract fun insert(components: ComponentModel)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insert(vararg components: ComponentEntity)
+    abstract fun insert(vararg components: ComponentModel)
 
     @Delete
-    abstract fun delete(component: ComponentEntity)
+    abstract fun delete(component: ComponentModel)
 
-    @Query("SELECT * FROM ComponentEntity")
-    abstract fun getAll(): List<ComponentEntity>
+    @Query("SELECT * FROM ComponentModel")
+    abstract fun getAll(): PagingSource<Int, ComponentModel>
 }

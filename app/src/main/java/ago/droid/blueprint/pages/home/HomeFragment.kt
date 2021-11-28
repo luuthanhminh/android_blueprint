@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import ago.droid.blueprint.R
 import ago.droid.blueprint.adapters.ComponentAdapter
 import ago.droid.blueprint.adapters.HomeAdapter
+import ago.droid.blueprint.adapters.diffutils.DCardDiffUtil
 import ago.droid.blueprint.viewmodels.home.HomeViewModel
 import android.widget.LinearLayout
 import android.widget.ProgressBar
@@ -23,8 +24,14 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 import ago.droid.blueprint.databinding.FragmentHomeBinding
+import ago.droid.blueprint.pages.notifications.NotificationsFragment
+import android.util.Log
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
+    val TAG = HomeFragment::class.java.simpleName
+
 
     @Inject lateinit var homeViewModel: HomeViewModel
 
@@ -60,8 +67,16 @@ class HomeFragment : Fragment() {
             lvCard.layoutManager = LinearLayoutManager(activity?.applicationContext)
             
             homeViewModel.cards.observe(viewLifecycleOwner, Observer {
-                var adapter = activity?.let { it1 -> HomeAdapter(it, it1.applicationContext) }
+                var adapter = activity?.let { it1 -> HomeAdapter(DCardDiffUtil, it1.applicationContext) }
                 lvCard.adapter = adapter
+
+                lifecycleScope.launch {
+                    adapter?.submitData(it)
+                    when(it){
+                        null -> progressBar.visibility = View.VISIBLE
+                        else -> progressBar.visibility = View.GONE
+                    }
+                }
             })
         }
     }

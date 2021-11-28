@@ -3,7 +3,9 @@ package ago.droid.blueprint.pages.notifications
 import ago.droid.blueprint.MainApplication
 import ago.droid.blueprint.R
 import ago.droid.blueprint.adapters.ComponentAdapter
+import ago.droid.blueprint.adapters.HomeAdapter
 import ago.droid.blueprint.adapters.diffutils.ComponentDiffUtil
+import ago.droid.blueprint.adapters.diffutils.DCardDiffUtil
 import ago.droid.blueprint.viewmodels.home.HomeViewModel
 import ago.droid.blueprint.viewmodels.notifications.NotificationsViewModel
 import android.graphics.drawable.Drawable
@@ -50,23 +52,24 @@ class NotificationsFragment : Fragment() {
         val lvComponents: RecyclerView = view.findViewById(R.id.lvComponent)
         lvComponents.layoutManager = LinearLayoutManager(activity?.applicationContext)
 
-        context?.let { ctx -> {
-            Log.i(TAG, "aaaav1:")
 
-            var adapter = ComponentAdapter(ComponentDiffUtil, ctx)
-            lvComponents.adapter = adapter
 
             notificationsViewModel.components.observe(viewLifecycleOwner, Observer {
+                var adapter = activity?.let { it1 -> ComponentAdapter(ComponentDiffUtil, it1.applicationContext) }
+                lvComponents.adapter = adapter
+
                 Log.i(TAG, "aaaav: $it")
                 lifecycleScope.launch {
                     adapter?.submitData(it)
-                    when(it){
-                        null -> progressBar.visibility = View.VISIBLE
-                        else -> progressBar.visibility = View.GONE
+                    if (adapter != null) {
+                        when(adapter.itemCount){
+                            0 -> progressBar.visibility = View.VISIBLE
+                            else -> progressBar.visibility = View.GONE
+                        }
                     }
                 }
             })
-        }}
-
     }
+
+
 }

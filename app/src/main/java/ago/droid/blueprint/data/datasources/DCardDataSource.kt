@@ -3,11 +3,12 @@ package ago.droid.blueprint.data.datasources
 import ago.droid.blueprint.data.database.dao.DCardDao
 import ago.droid.blueprint.data.models.DCardModel
 import androidx.paging.DataSource
+import androidx.paging.PagingSource
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 interface DCardDataSource {
-    fun getCards(): DataSource.Factory<Int, DCardModel>;
+    fun getCards(): PagingSource<Int, DCardModel>;
 }
 
 class DCardDataSourceImpl @Inject constructor(val dCardDao: DCardDao) : DCardDataSource {
@@ -26,12 +27,12 @@ class DCardDataSourceImpl @Inject constructor(val dCardDao: DCardDao) : DCardDat
 
     }
 
-    override fun getCards(): DataSource.Factory<Int, DCardModel> {
+    override fun getCards(): PagingSource<Int, DCardModel> {
 //        delay(2000L);
         return buildData();
     }
 
-    private fun buildData(): DataSource.Factory<Int, DCardModel> {
+    private fun buildData(): PagingSource<Int, DCardModel> {
         return dCardDao.getAll()
     }
 

@@ -1,6 +1,7 @@
 package ago.droid.blueprint.adapters
 
 import ago.droid.blueprint.R
+import ago.droid.blueprint.domain.entities.Component
 import ago.droid.blueprint.domain.entities.DCard
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -16,12 +19,12 @@ import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ViewListener
 import me.relex.circleindicator.CircleIndicator
 
-class HomeAdapter(private var items: List<DCard>,
-                       private val context: Context
-) : RecyclerView.Adapter<BaseHolder>() {
+class HomeAdapter(private var diffCallback: DiffUtil.ItemCallback<DCard>,
+                  private val context: Context
+) : PagingDataAdapter<DCard, BaseHolder>(diffCallback)  {
 
     override fun getItemViewType(position: Int): Int {
-        if(items[position].images.size > 1){
+        if(getItem(position)?.images?.size!! > 1){
             return 1
         }
         return super.getItemViewType(position)
@@ -35,7 +38,7 @@ class HomeAdapter(private var items: List<DCard>,
     }
 
     override fun onBindViewHolder(holder: BaseHolder, position: Int) {
-        val card = items[position]
+        val card = getItem(position) ?: return
         val factory = DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()
         when(holder.itemViewType){
             0 -> {
@@ -74,9 +77,9 @@ class HomeAdapter(private var items: List<DCard>,
 
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
+//    override fun getItemCount(): Int {
+//        return itemCount
+//    }
 }
 
 open class  BaseHolder(view: View): RecyclerView.ViewHolder(view){}

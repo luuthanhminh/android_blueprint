@@ -70,7 +70,7 @@
                     style="?android:attr/progressBarStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="@{homeViewModel.cards.size() == 0? View.VISIBLE : View.GONE}"
+                    android:visibility="@{homeViewModel.cards == null? View.VISIBLE : View.GONE}"
                     app:layout_constraintBottom_toBottomOf="@+id/lvCard"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/lvCard"

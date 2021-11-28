@@ -2,6 +2,7 @@ package ago.droid.blueprint.data.database.dao
 
 import ago.droid.blueprint.data.models.DCardModel
 import androidx.paging.DataSource
+import androidx.paging.PagingSource
 import androidx.room.*
 
 @Dao
@@ -16,5 +17,5 @@ abstract class DCardDao {
     abstract fun delete(dCard: DCardModel)
 
     @Query("SELECT * FROM DCardModel")
-    abstract fun getAll(): DataSource.Factory<Int, DCardModel> //List<DCardModel>
+    abstract fun getAll(): PagingSource<Int, DCardModel> //List<DCardModel>
 }

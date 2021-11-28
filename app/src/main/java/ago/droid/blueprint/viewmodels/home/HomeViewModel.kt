@@ -11,10 +11,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
-import androidx.paging.toLiveData
+import androidx.paging.*
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
+import java.lang.Exception
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -28,24 +28,40 @@ class HomeViewModel @Inject constructor(
     private val _openTaskEvent = MutableLiveData<Unit>()
     val openTaskEvent: LiveData<Unit> = _openTaskEvent
 
-//    private var _cards = MutableLiveData<PagedList<DCardModel>>().apply {
-//        value = emptyList()
-//    }
-    lateinit var cards: LiveData<PagedList<DCard>>// = _cards
-    val pagedListConfig = PagedList.Config.Builder()
-        .setEnablePlaceholders(false)
-        .setPageSize(5).build()
+    var cards: MutableLiveData<PagingData<DCard>> = MutableLiveData()// = _cards
+
 
     init {
         loadData()
     }
     private fun loadData() {
-        viewModelScope.launch {
-            val result = fetchDCardsUseCase(Unit)
-            Log.i(TAG, "loadData: $result")
-            cards = LivePagedListBuilder(result, pagedListConfig)
-                .build()
+
+        try {
+            val result = Pager(
+                // Configure how data is loaded by passing additional properties to
+                // PagingConfig, such as prefetchDistance.
+                PagingConfig(pageSize = 20)
+            ) {
+                fetchDCardsUseCase(Unit)
+            }.flow
+                .cachedIn(viewModelScope)
+
+            viewModelScope.launch {
+                result.collect {
+                    Log.i(TAG, "loadData: $it")
+                    cards.postValue(it.map { it1 -> DCard(it1.header, it1.description, it1.images) })
+                }
+            }
+        } catch (e: Exception) {
+            Log.i(TAG, "aaaaa: $e")
         }
+
+//        viewModelScope.launch {
+//            val result = fetchDCardsUseCase(Unit)
+//            Log.i(TAG, "loadData: $result")
+//            cards = LivePagedListBuilder(result, pagedListConfig)
+//                .build()
+//        }
     }
 
     fun navigateToFragment(navId: Int, fragmentId:Int){
